@@ -5,7 +5,7 @@ PFM := $(PLATFORM_REPO_PATHS)/$(PLATFORM)/$(PLATFORM).xpfm
 NCPUS := $(shell grep -c ^processor /proc/cpuinfo)
 JOBS := $(shell expr $(NCPUS) - 1)
 
-VISION_LIB_FLAGS := -I. -I./Vitis_Libraries/vision/L1/include --config vision_config.ini
+VISION_LIB_FLAGS := -I. -I`git root`/../Vitis_Libraries/vision/L1/include --config vision_config.ini
 
 VPPFLAGS := --platform $(PFM) -t $(TARGET) -s -g
 VPPLFLAGS := --jobs $(JOBS) --config profile.ini
@@ -15,6 +15,9 @@ ifeq (u250, $(findstring u250, $(PLATFORM)))
 	BOARD_CONFIG := connectivity_u250.ini
 endif
 ifeq (u50, $(findstring u50, $(PLATFORM)))
+	BOARD_CONFIG := connectivity_u50.ini
+endif
+ifeq (u55, $(findstring u55, $(PLATFORM)))
 	BOARD_CONFIG := connectivity_u50.ini
 endif
 VPPLFLAGS += --config $(BOARD_CONFIG)
