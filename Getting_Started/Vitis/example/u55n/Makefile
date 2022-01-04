@@ -1,8 +1,21 @@
-XF_PROJ_ROOT ?= $(shell bash -c 'export MK_PATH=`git root`; echo $${MK_PATH%/Getting_Started/Vitis/example/src/*}')
+# Getting Started with U55N aka Varium C1100
+#
+# Additional environment setup on Debian:
+#
+# ```bash
+# export PLATFORM_REPO_PATHS=/opt/xilinx/platforms
+# export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu
+# ```
+#
+# Add this to target software emulation:
+#
+# ```bash
+# export TARGET=sw_emu
+# ```
 
-TARGET := hw_emu
+TARGET ?= hw_emu
 PLATFORM := xilinx_u55n_gen3x4_xdma_1_202110_1
-SRCDIR := $(XF_PROJ_ROOT)/Getting_Started/Vitis/example/src
+SRCDIR := ../src
 BUILD_DIR := $(TARGET)
 
 run: build
@@ -26,7 +39,7 @@ $(BUILD_DIR)/app.exe: $(SRCDIR)/host.cpp
 
 xo: $(BUILD_DIR)/vadd.xo
 $(BUILD_DIR)/vadd.xo: $(SRCDIR)/vadd.cpp
-	v++ -c -t ${TARGET} --platform $(PLATFORM) --config $(SRCDIR)/u55n.cfg -k vadd -I$(SRCDIR) $(SRCDIR)/vadd.cpp -o $(BUILD_DIR)/vadd.xo 
+	v++ -c -t ${TARGET} --platform $(PLATFORM) --config $(SRCDIR)/u55n.cfg -k vadd -I$(SRCDIR) $(SRCDIR)/vadd.cpp -o $(BUILD_DIR)/vadd.xo
 
 xclbin: $(BUILD_DIR)/vadd.xclbin
 $(BUILD_DIR)/vadd.xclbin: $(BUILD_DIR)/vadd.xo

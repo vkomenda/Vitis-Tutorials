@@ -26,7 +26,7 @@ $(BUILD_DIR)/app.exe: $(SRCDIR)/host.cpp
 
 xo: $(BUILD_DIR)/vadd.xo
 $(BUILD_DIR)/vadd.xo: $(SRCDIR)/vadd.cpp
-	v++ -c -t ${TARGET} --platform $(PLATFORM) --config $(SRCDIR)/u200.cfg -k vadd -I$(SRCDIR) $(SRCDIR)/vadd.cpp -o $(BUILD_DIR)/vadd.xo 
+	v++ -c -t ${TARGET} --platform $(PLATFORM) --config $(SRCDIR)/u200.cfg -k vadd -I$(SRCDIR) $(SRCDIR)/vadd.cpp -o $(BUILD_DIR)/vadd.xo
 
 xclbin: $(BUILD_DIR)/vadd.xclbin
 $(BUILD_DIR)/vadd.xclbin: $(BUILD_DIR)/vadd.xo
